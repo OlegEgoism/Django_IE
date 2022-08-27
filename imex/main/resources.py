@@ -1,5 +1,6 @@
 from django.db.models import QuerySet
 from import_export import resources, fields
+from import_export.fields import Field
 from import_export.widgets import ForeignKeyWidget, ManyToManyWidget
 from .models import Skill, City, People
 
@@ -43,15 +44,19 @@ class ManyToManyWidgetWithCreation(ManyToManyWidget):
 
 
 class PeopleResource(resources.ModelResource):
-    city = fields.Field(column_name='city', attribute='city',
+    name = Field(column_name='Имя', attribute='name')
+    age = Field(column_name='Возраст', attribute='age')
+    email = Field(column_name='Почта', attribute='email')
+    city = fields.Field(column_name='Город', attribute='city',
                         widget=ForeignKeyWidgetWithCreation(City, field='name', create=True))
-    skill = fields.Field(column_name='skill', attribute='skill',
+    skill = fields.Field(column_name='Умения', attribute='skill',
                          widget=ManyToManyWidgetWithCreation(Skill, field='name', separator=', ', create=True))
+    is_active = Field(column_name='Автивно', attribute='is_active', default=False)
 
     class Meta:
         model = People
-        fields = ('name', 'age', 'email', 'city', 'skill',)
-        export_order = ('name', 'age', 'email', 'city', 'skill',)  # порядок экспорта полей
-        import_id_fields = ('name',)  # поля для определения идентификатора
-        force_init_instance = False  # Если установлено значение True, этот параметр предотвратит проверку базы данных на наличие существующих экземпляров при импорте. Включение этого параметра повышает производительность, если ваш набор данных импорта гарантированно содержать новые экземпляры.
-        # exclude = ('id',)  # исключить поле
+        fields = 'name', 'age', 'email', 'city', 'skill', 'is_active'
+        export_order = 'name', 'age', 'email', 'city', 'skill', 'is_active'  # порядок экспорта полей
+        import_id_fields = 'name',  # поля для определения идентификатора
+        exclude = 'id',  # исключить поле
+        # force_init_instance = False  # Если установлено значение True, этот параметр предотвратит проверку базы данных на наличие существующих экземпляров при импорте. Включение этого параметра повышает производительность, если ваш набор данных импорта гарантированно содержать новые экземпляры.

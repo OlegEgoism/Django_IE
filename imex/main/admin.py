@@ -1,28 +1,43 @@
+from admin_auto_filters.filters import AutocompleteFilter
 from django.contrib import admin
-from import_export.admin import ImportExportModelAdmin, ImportExportActionModelAdmin, ExportActionMixin
+from import_export.admin import ImportExportModelAdmin
 from .models import People, City, Skill
 from .resources import PeopleResource
 
-admin.site.site_header = 'Django Import-Export'  # Надпись в админке сайта
+admin.site.site_header = 'Django Import-Export'
 
 
-@admin.register(People)
-class PeopleAdmin(ImportExportModelAdmin):
-    """Информация о человеке"""
-    resource_class = PeopleResource
-    list_display = 'name', 'age', 'email', 'city', 'is_active'
-    list_editable = 'is_active',
-    list_filter = 'is_active', 'city',
-    list_per_page = 10
+class CityFilter(AutocompleteFilter):
+    title = 'Город'
+    field_name = 'city'
 
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     """Город"""
-    list_display = 'name', 'count_people'
+    list_display = 'name', 'count_people',
+    search_fields = 'name',
+    list_per_page = 10
+
+
+class SkillFilter(AutocompleteFilter):
+    title = 'Умения'
+    field_name = 'skill'
 
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
     """Умения"""
     list_display = 'name', 'count_people'
+    search_fields = 'name',
+    list_per_page = 10
+
+
+@admin.register(People)
+class PeopleAdmin(ImportExportModelAdmin):
+    """Информация о человеке"""
+    resource_class = PeopleResource
+    list_display = 'name', 'age', 'email', 'count_skill', 'is_active',
+    list_editable = 'is_active',
+    list_filter = 'is_active', CityFilter, SkillFilter,
+    list_per_page = 10
