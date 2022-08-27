@@ -3,6 +3,7 @@ defusedxml==0.7.1
 diff-match-patch==20200713
 Django==4.0.6
 django-admin-autocomplete-filter==0.7.1
+django-admin-numeric-filter==0.1.6
 django-import-export==2.8.0
 et-xmlfile==1.1.0
 MarkupPy==1.14

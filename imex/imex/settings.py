@@ -40,8 +40,10 @@ INSTALLED_APPS = [
 
     'main',
     'import_export',
-
+    'admin_numeric_filter',
     'admin_auto_filters',
+    'more_admin_filters',
+
 ]
 
 MIDDLEWARE = [
