@@ -9,6 +9,7 @@ class People(models.Model):
     city = models.ForeignKey('City', verbose_name='Город', related_name='peoples', on_delete=models.CASCADE, blank=True,
                              null=True)
     skill = models.ManyToManyField('Skill', verbose_name='Умения', related_name='peoples', blank=True)
+    is_active = models.BooleanField(verbose_name='Активный', blank=False)
 
     class Meta:
         verbose_name = 'Информация о человеке'
@@ -50,3 +51,6 @@ class Skill(models.Model):
         return self.peoples.count()
 
     count_people.short_description = 'Количество людей'
+
+# class Percent(models.Model):
+#     size =
