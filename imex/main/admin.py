@@ -46,6 +46,5 @@ class PeopleAdmin(ImportExportModelAdmin, NumericFilterModelAdmin):
     list_filter = (
         'is_active', CityFilter, SkillFilter,
         ('age', SliderNumericFilter),
-        ('skill', RelatedDropdownFilter),
     )
     list_per_page = 10
