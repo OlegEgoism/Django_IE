@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'admin_auto_filters',
     'more_admin_filters',
 
+
 ]
 
 MIDDLEWARE = [
