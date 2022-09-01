@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация</title>
+</head>
+<body>
+<div>
+    <link>
+    <a type="submit" href="{% url 'admin:index' %}">ADMIN</a></link>
+</div>
+<h1>Информация</h1>
+{% for i in people %}
+<u>Имя</u> - {{ i.name }}
+<u>Возраст</u> - {{ i.age }}
+<u>Почта</u> - {{ i.email }}<br>
+{% endfor %}
+
+<h1>Город</h1>
+{{ city }}
+</body>
+</html>

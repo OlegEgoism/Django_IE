@@ -1,5 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from .models import People, City
 
 
-def home(request):
-    return HttpResponse("<h2>Hello, world. <br> Django Import-Export работает, я рад!!!</h2>")
+def info(request):
+    people = People.objects.all()
+    city = City.objects.get(name='Орша')
+    context = {'people': people, 'city': city}
+    return render(request, template_name='info.html', context=context)
