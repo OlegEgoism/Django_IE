@@ -39,7 +39,7 @@ class SkillAdmin(admin.ModelAdmin):
 class PeopleAdmin(ImportExportModelAdmin, NumericFilterModelAdmin):
     """Информация о человеке"""
     resource_class = PeopleResource
-    list_display = 'id', 'name', 'age', 'email', 'count_skill', 'is_active',
+    list_display = 'name', 'age', 'city', 'email', 'count_skill', 'is_active',
     list_editable = 'is_active', 'age'
     list_filter = (
         'is_active', CityFilter, SkillFilter,

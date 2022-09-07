@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <link>
+    <a type="submit" href="{% url 'admin:index' %}">ADMIN</a></link> <br>
+    <a type="submit" href="{% url 'info' %}">INFO</a></link>
+</div>
+<form method="POST">
+    {% csrf_token %}
+    {{ add_form.as_p }}
+    <button type="submit">Отправить данные</button>
+</form>
+</body>
+</html>

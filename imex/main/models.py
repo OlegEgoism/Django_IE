@@ -40,9 +40,10 @@ class People(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=20, unique=True)
     age = models.IntegerField(verbose_name='Возраст')
     email = models.EmailField(verbose_name='Электронная почта', blank=True, null=True)
-    city = models.ForeignKey(City, verbose_name='Город', related_name='peoples', on_delete=models.CASCADE)
-    skill = models.ManyToManyField(Skill, verbose_name='Умения', related_name='peoples', blank=True)
-    is_active = models.BooleanField(verbose_name='Активный', blank=False)
+    city = models.ForeignKey(City, verbose_name='Город', related_name='peoples', on_delete=models.CASCADE, null=True,
+                             blank=True)
+    skill = models.ManyToManyField(Skill, verbose_name='Умения', related_name='peoples', null=True, blank=True)
+    is_active = models.BooleanField(verbose_name='Активный', blank=True)
 
     class Meta:
         verbose_name = 'Информация о человеке'
